@@ -34,7 +34,7 @@ class FabricaRadio < FabricaDispositivos
 end
 ```
 
-Estas dos clases heredan el método de la superclase `FabricaDispositivos`, cada una de las subclases implementan de manera concreta la creación de dos nuevos dispositivos, para este caso particupar la clase `FabricaTV` implementa una `TV` y la clase `FabricaRadio` implementa una `Radio`.
+Estas dos clases heredan el método de la superclase `FabricaDispositivos`, cada una de las subclases implementan de manera concreta la creación de dos nuevos dispositivos, para este caso particular la clase `FabricaTV` implementa una `TV` y la clase `FabricaRadio` implementa una `Radio`.
 
 Esta es una de las formas en la que se pueden implementar nuevos elementos de modo que el resto del código o programa no se vea comprometido, ya que es independiente del tipo de elemento a procesar. Por lo que este método nos permite implementar independencia de abstracción y por lo que se puede realizar nuevas implementaciones.
 
