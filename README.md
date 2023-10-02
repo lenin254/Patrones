@@ -7,7 +7,7 @@ En el código, se implementa el patrón Factory Method para dar disponibilidad a
 
 ### Clase `FabricaDispositivos`:
 
-```
+```ruby
 class FabricaDispositivos
   def crear_dispositivos
     raise NotImplementedError, "#{self.class} no ha implementado el metodo '#{_method_}'"
@@ -20,7 +20,7 @@ Esta es la clase base del patrón Factory Method que actúa como el método de f
 
 ### Clase `FabricaTV` y `FabricaRadio`:
 
-```
+```ruby
 class FabricaTV < FabricaDispositivos
   def crear_dispositivos
     TV.new
