@@ -1,6 +1,41 @@
 # REPASO-PATRONES DE DISEÑO
 ## FACTORY METHOD
 
+Muchas veces se comete el error de realizar proyectos cuyo enfoque en único, es decir solo están pensandos para un solo elemento y todas las funcionalidades están implementadas alrededor de dicho elemento único. A medida que nuestro proyecto escale se ve en la necesidad  de crear nuevos elementos por lo que es posible que tendremos que reestructurar todo el código. Para solucionar este problema se tiene el patrón Factory Method, este es un patrón de diseño creacional que tiene como disponibilida crear objetos en una superclase, mientras permite a las subclases alterar el tipo de objetos que se crearán. 
+
+En el código, se implementa el patrón Factory Method para dar disponibilidad a la creación de dos elementos  **`TV`** y **`Radio`**.
+
+### Clase `FabricaDispositivos`:
+
+```
+class FabricaDispositivos
+  def crear_dispositivos
+    raise NotImplementedError, "#{self.class} no ha implementado el metodo '#{_method_}'"
+  end
+end
+```
+
+Esta es la clase base del patrón Factory Method que actúa como el método de fábrica. Se ve que no se ha creado ningún tipo de objeto específico, es en las subclases de esta clase base que deben implementar este método para crear dichos objetos. También se implementa un mensaje de excepcion en `NotImplementedError, "#{self.class} no ha implementado el metodo '#{_method_}'"` esto ayuda a identificar la clase y el método que aún deben implementarse. 
+
+
+### Clase `FabricaTV` y `FabricaRadio`:
+
+```
+class FabricaTV < FabricaDispositivos
+  def crear_dispositivos
+    TV.new
+  end
+end
+
+class FabricaRadio < FabricaDispositivos
+  def crear_dispositivos
+    Radio.new
+  end
+end
+```
+
+Estas dos clases heredan el método de la superclase `FabricaDispositivos`, cada una de las subclases implementan de manera concreta la creación de dos nuevos dispositivos, para este caso particupar los elemenos son `TV` y `Radio`.
+
 ## COMMAND
 
 ## BRIDGE
