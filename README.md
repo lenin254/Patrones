@@ -45,6 +45,8 @@ El objeto **comando** no contiene la lógica de la tarea (método) a realizarse,
 
 El objeto **invocador** tiene la tarea de invocar el método *execute()* de un objeto comando a través de la **interfaz de comandos**. Para esto se debe pasar al objeto **invocador** qué comando se desea ejecutar. 
 
+La idea principal de este patrón de diseño es en lugar de pasar una solicitud directamente a un objeto receptor, podamos encapsular esta solicitud en un objeto autónomo **comando**. Esto no solo nos ayuda a desacoplar la lógica del invocador del comando en sí, sino que el convertir esa solicitud en un objeto nos abre más posibilidades: podemos agregarlos a una lista y crear un historial de comandos, podemos formar un sistema de colar, etc.
+
 ```ruby
 class ComandoDispositivo
   def execute
