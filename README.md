@@ -43,7 +43,7 @@ El objeto **comando** no contiene la lógica de la tarea (método) a realizarse,
 
 El objeto **invocador** tiene la tarea de invocar el método *execute()* de un objeto comando a través de la **interfaz de comandos**. Para esto se debe pasar al objeto **invocador** qué comando se desea ejecutar. 
 
-```
+```ruby
 class ComandoDispositivo
   def execute
     raise NotImplementedError, "Subclasses deben implementar el método 'execute'"
@@ -72,7 +72,7 @@ end
 ```
 En este caso, **ComandoDispositivo** es la interface que implementaran los comandos concretos **ComandoEncender** y **ComandoApagar**. Estos dos comandos llaman a los métodos **encender** y **apagar** del objeto cuya referencia se les ha pasado. Las clases receptoras serian las clases que definimos anteriormente:
 
-```
+```ruby
 # Clase Product - TV
 class TV < Dipositivo
   def encender
@@ -98,7 +98,7 @@ end
 ```
 Y finalmente, definimos una clase invocadora **ControlRemotoCommand** que se encargará de la ejecución de los comandos que le pasemos.
 
-```
+```ruby
 class ControlRemotoCommand
   def setComando(comando)
     @comando = comando
@@ -110,7 +110,7 @@ class ControlRemotoCommand
 end
 ```
 A continuación observamos como inicializar un objeto ControlRemotoCommand y como debemos pasarle los comandos a realizar:
-```
+```ruby
 control = ControlRemotoCommand.new
 
 control.setComando(ComandoEncender.new(tv))
