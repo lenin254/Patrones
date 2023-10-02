@@ -37,6 +37,86 @@ end
 Estas dos clases heredan el método de la superclase `FabricaDispositivos`, cada una de las subclases implementan de manera concreta la creación de dos nuevos dispositivos, para este caso particupar los elemenos son `TV` y `Radio`.
 
 ## COMMAND
+Este patrón de diseño consiste de 4 elementos: Una **interfaz de comandos**, una **clase receptora**, una **clase invocadora** y **Comandos** que implementen la interfaz de comandos.  
+ 
+El objeto **comando** no contiene la lógica de la tarea (método) a realizarse, la que se encargará de esto es el objeto **receptor**. El objeto comando lo que contiene son los parámetros necesarios para la ejecución de la tarea, así como una referencia al objeto receptor en sí. El objeto receptor realizará la tarea cuando se invoque el método *execute()* del objeto comando.
+
+El objeto **invocador** tiene la tarea de invocar el método *execute()* de un objeto comando a través de la **interfaz de comandos**. Para esto se debe pasar al objeto **invocador** qué comando se desea ejecutar. 
+
+```
+class ComandoDispositivo
+  def execute
+    raise NotImplementedError, "Subclasses deben implementar el método 'execute'"
+  end
+end
+
+class ComandoEncender < ComandoDispositivo
+  def initialize(dispositivo)
+    @dispositivo = dispositivo
+  end
+
+  def execute
+    @dispositivo.encender
+  end
+end
+
+class ComandoApagar < ComandoDispositivo
+  def initialize(dispositivo)
+    @dispositivo = dispositivo
+  end
+
+  def execute 
+    @dispositivo.apagar
+  end
+end
+```
+En este caso, **ComandoDispositivo** es la interface que implementaran los comandos concretos **ComandoEncender** y **ComandoApagar**. Estos dos comandos llaman a los métodos **encender** y **apagar** del objeto cuya referencia se les ha pasado. Las clases receptoras serian las clases que definimos anteriormente:
+
+```
+# Clase Product - TV
+class TV < Dipositivo
+  def encender
+    puts "Encendiendo el televisor"
+  end
+
+  def apagar
+    puts "Apagando el televisor"
+  end
+end
+
+# Clase Product - Radio
+class Radio < Dipositivo
+  def encender
+    puts "Encendiendo la radio"
+  end
+
+  def apagar
+    puts "Apagando la radio"
+  end
+end
+
+```
+Y finalmente, definimos una clase invocadora **ControlRemotoCommand** que se encargará de la ejecución de los comandos que le pasemos.
+
+```
+class ControlRemotoCommand
+  def setComando(comando)
+    @comando = comando
+  end
+
+  def executeComando
+    @comando.execute if @comando.is_a? ComandoDispositivo
+  end
+end
+```
+A continuación observamos como inicializar un objeto ControlRemotoCommand y como debemos pasarle los comandos a realizar:
+```
+control = ControlRemotoCommand.new
+
+control.setComando(ComandoEncender.new(tv))
+control.executeComando
+```
+Al objeto invocador **control** le pasamos como argumento el nuevo objeto comando **ComandoEncender.new(tv)** que se encargará de llamar al método **encender** del objeto **tv**. En la siguiente línea le indicamos a **control** que ejecute el comando que tenga guardado.
 
 ## BRIDGE
 
